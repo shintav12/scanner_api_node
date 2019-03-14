@@ -2,13 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 const mysqlConnection = require('../database');
-
-router.get('/system', (req, res) => {
+router.get('/parameters', (req, res) => {
     var data = [];
-    mysqlConnection.query('select  s.id, s.name ' +
+    mysqlConnection.query('select  p.id, p.name, cp.value ' +
         'from cases c ' +
-        'join cases_systems cs on cs.case_id = c.id ' +
-        'join system s on s.id = cs.system_id ' +
+        'join cases_parameters cp on cp.case_id = c.id ' +
+        'join parameters p on p.id = cp.parameter_id ' +
         'where c.status = 1', (err, rows, fields) => {
             if (!err) {
                 data = rows;
