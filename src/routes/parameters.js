@@ -4,7 +4,7 @@ const router = express.Router();
 const mysqlConnection = require('../database');
 router.get('/parameters', (req, res) => {
     var data = [];
-    mysqlConnection.query('select  p.id, p.name, cp.value ' +
+    mysqlConnection.query('select  p.id, p.name, cp.* ' +
         'from cases c ' +
         'join cases_parameters cp on cp.case_id = c.id ' +
         'join parameters p on p.id = cp.parameter_id ' +
